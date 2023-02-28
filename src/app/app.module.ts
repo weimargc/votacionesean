@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CommonModule } from '@angular/common';
 import { InterceptorService, SpinnerService } from './interceptors/interceptor.service';
+import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,12 @@ import { InterceptorService, SpinnerService } from './interceptors/interceptor.s
     NgSelectModule,
     RecaptchaFormsModule,
     RecaptchaModule,
+    ToastNoAnimationModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 15000, // 15 seconds
+      closeButton: true,
+      progressBar: true,
+    }),
   ],
   providers: [
     SpinnerService,

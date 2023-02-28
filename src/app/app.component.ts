@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { forkJoin } from 'rxjs';
 import { Constants } from './common/constants.class';
 import { ConfirmPasswordValidator } from './confirm-password.validator';
@@ -15,6 +16,8 @@ import { SpinnerService } from './interceptors/interceptor.service';
 })
 export class AppComponent {
   @ViewChild('contentModalInfodescargaExito', { static: false }) childModalInfoDescargaExito: ElementRef;
+  @ViewChild('contentModalConsultaExitosa', { static: false }) childModalConsultaExitosa: ElementRef;
+
   title = 'pdf';
 
   form: FormGroup | any;
@@ -42,6 +45,7 @@ export class AppComponent {
   tokenRecaptchaV2: string|undefined;
   recaptchaTemp: NgForm;
   correctaSolicitudHttp = false;
+  date: Date = new Date();
   initSpinner() {
     this._spinnerService.getSpinnerObserver().subscribe((status) => {
       this.correctaSolicitudHttp = (status === 'start');
@@ -52,7 +56,10 @@ export class AppComponent {
   constructor(private cdRef: ChangeDetectorRef, //para detectar cambios de estado de spinner
               private fb: FormBuilder, private serviceDescarga: DescargasService,
               private modalService: NgbModal,
-              public _spinnerService: SpinnerService) { }
+              public _spinnerService: SpinnerService,
+              private toastrService: ToastrService) {
+
+               }
 
   ngOnInit(): void {
     let url = window.location;
@@ -66,6 +73,40 @@ export class AppComponent {
       user: ['', [Validators.required]],
       pass: ['', Validators.required]
     })
+  }
+
+  validarUsuarioVotacion(){
+
+    let data = {
+      usuario: this.form.controls['user'].value,
+      contrasena: this.form.controls['pass'].value
+    };
+
+    if (this.form.invalid) {
+      this.submitted = true
+      return;
+    }
+    const datosValidaEstudiante = {
+      num_iden: this.form.value.user,
+      tipo_iden: this.form.value.pass
+     };
+     //console.log('datos usuario : >>', datosAutenticacion);
+     this.serviceDescarga.validarEstudianteExiste(datosValidaEstudiante).subscribe(respValida=>{
+      if(respValida.respuesta==='true'){
+        //Lanzar modal
+        this.abrirModalConsultaExitosa();
+        // formRecaptcha.controls['recaptcha'].setValue(null);
+      }else{
+        this.mensajeErrorModalCredenciales = 'No se encontró el usuario en la base de datos. Intenta nuevamente.';
+        this.toastrService.warning(this.mensajeErrorModalCredenciales, 'Ningún registro!');
+      }
+     },(error:any)=>{
+      this.mensajeErrorModalCredenciales = Constants.MENSAJES_ALERTS.ERROR_API;
+      this.toastrService.error(this.mensajeErrorModalCredenciales, 'Error!');
+     });
+  }
+  abrirModalConsultaExitosa() {
+    this.modalService.open(this.childModalConsultaExitosa, {backdrop:'static'});
   }
 
   sendData() {

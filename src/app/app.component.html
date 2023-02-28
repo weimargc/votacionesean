@@ -10,7 +10,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-verde" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Consulta de Certificados</a>
+      <a class="navbar-brand" href="#">Consulta del censo electoral votaciones {{date.getFullYear()}}</a>
     </div>
   </nav>
 </div>
@@ -22,7 +22,7 @@
         <h1 class="text-jus">¡Bienvenido a la Universidad Ean!</h1>
         <p class="text-jus">
 
-          Mediante esta plataforma podrás descargar los certificados académicos solicitados.  Si requieres ampliar la información del certificado puedes ingresar a la sala de atención <a href="https://bit.ly/3fw38kb" target="_blank">https://bit.ly/3fw38kb</a> o radicar la solicitud en la mesa de servicios en el link: <a href="https://universidadean.edu.co/mesa-de-servicios" target="_blank">https://universidadean.edu.co/mesa-de-servicios</a> Centro Responsable: Registro Académico / Categoría: Certificados.<br/>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad m puedes ingresar a la sala de atención <a href="https://bit.ly/3fw38kb" target="_blank">https://bit.ly/3fw38kb</a> o radicar la solicitud en la mesa de servicios en el link: <a href="https://universidadean.edu.co/mesa-de-servicios" target="_blank">https://universidadean.edu.co/mesa-de-servicios</a> Lorem ipsum dolor sit amet, consectetur adipiscing eli.<br/>
           Si tienes alguna dificultad con este enlace, por favor ingresa a la sala de atención del TIC <a href="https://hab.me/gzGSTYp" target="_blank">https://hab.me/gzGSTYp</a>  o radica tu caso en la mesa de servicios <a href="https://universidadean.edu.co/mesa-de-servicios" target="_blank">https://universidadean.edu.co/mesa-de-servicios</a>  seleccionando:<br/>
           -Centro Responsable: TIC<br/>
           -Tipo de solicitud: Gestión de Usuario y contraseña.<br/>
@@ -35,7 +35,7 @@
         <div class="card mtd-5">
           <div class="card-body">
             <form [formGroup]="form">
-              <h3 class="text-center">Inicia sesión y descarga tu certificado</h3>
+              <h3 class="text-center">Credenciales</h3>
               <div class="mb-3">
                 <label for="exampleInputuser1" class="form-label">Usuario</label>
                 <input type="text" class="form-control" id="exampleInputuser1" formControlName="user"
@@ -45,7 +45,7 @@
                   <!-- <small class="text-danger" *ngIf="form.get('user').errors?.user">El formato no es correcto</small> -->
                 </div>
               </div>
-              <div class=" mb-3">
+              <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Contraseña</label>
                 <input type="password" class="form-control" id="exampleInputPassword1" formControlName="pass">
                 <div *ngIf="(form.get('pass').invalid && form.get('pass').touched) || form.get('pass').dirty">
@@ -56,8 +56,8 @@
                 <small class="text-danger">{{messageError}}</small>
               </div>
               <div class="d-grid gap-2 mt-2">
-                <button *ngIf="!loader" class="btn btn-success text-center" (click)="sendData()" type="button"
-                  [disabled]="!codeEncryp">Descargar</button>
+                <button *ngIf="!loader" class="btn btn-success text-center" (click)="validarUsuarioVotacion()" type="button"
+                [disabled]="correctaSolicitudHttp">Consultar</button>
                 <button *ngIf="loader" class="btn btn-success text-center" type="button" style="height: 37px;">
                   <div class="lds-ellipsis">
                     <div></div>
@@ -66,14 +66,14 @@
                     <div></div>
                   </div>
                 </button>
-                <div  class="container-fluid">
+                <!-- <div  class="container-fluid">
                   <div  class="row">
                     <div  class="col-12 text-center">
                       <a href="https://cambioclave.universidadean.edu.co/correo.aspx" target="_blank" class="btn btn-link text-center">Soy estudiante activo y olvidé mis credenciales</a>
                       <a *ngIf="true" class="btn btn-link text-center" (click)="abrirModalrecuperarCredenciales(modalRecuperaCredenciales)">Soy egresado y olvidé mis credenciales</a>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
             </form>
           </div>
@@ -507,3 +507,20 @@
 
 
 </ng-template>
+
+<ng-template #contentModalConsultaExitosa let-modal let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" style="font-size: 1.3rem;">Consulta exitosa</h4>
+    <!-- <a class="close click" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </a> -->
+  </div>
+  <div class="modal-body">
+    <h5 class="text-center">Usuario habilitado para votar.</h5>
+  </div>
+  <div class="modal-footer"> <button type="button" class="btn" (click)="d('Cross click')">Cerrar</button></div>
+
+
+
+</ng-template>
+

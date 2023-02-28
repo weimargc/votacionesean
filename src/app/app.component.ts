@@ -75,7 +75,22 @@ export class AppComponent {
     })
   }
 
-  validarUsuarioVotacion(){
+  validarUsuarioVotacion(formRecaptcha:NgForm){
+    this.mensajeErrorModalCredenciales=null;
+    this.recaptchaTemp = formRecaptcha;
+    if (formRecaptcha.invalid) {
+      for (const control of Object.keys(formRecaptcha.controls)) {
+        formRecaptcha.controls[control].markAsTouched();
+      }
+      return Object.values(this.form.controls).forEach((control:any) => {
+        if (control instanceof FormGroup) {
+          Object.values(control.controls).forEach(c => c.markAsTouched());
+        }
+        else {
+          control.markAsTouched();
+        }
+      });
+    }
 
     let data = {
       usuario: this.form.controls['user'].value,

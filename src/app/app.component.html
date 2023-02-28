@@ -19,8 +19,8 @@
   <div class="container">
     <div class="row mt-3">
       <div class="col-md-6 col-sm-12 colTexto ">
-        <h1 class="text-jus">¡Bienvenido a la Universidad Ean!</h1>
-        <p class="text-jus">
+        <h2 class="text-justify">¡Bienvenido a la Universidad Ean!</h2>
+        <p class="text-justify">
 
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad m puedes ingresar a la sala de atención <a href="https://bit.ly/3fw38kb" target="_blank">https://bit.ly/3fw38kb</a> o radicar la solicitud en la mesa de servicios en el link: <a href="https://universidadean.edu.co/mesa-de-servicios" target="_blank">https://universidadean.edu.co/mesa-de-servicios</a> Lorem ipsum dolor sit amet, consectetur adipiscing eli.<br/>
           Si tienes alguna dificultad con este enlace, por favor ingresa a la sala de atención del TIC <a href="https://hab.me/gzGSTYp" target="_blank">https://hab.me/gzGSTYp</a>  o radica tu caso en la mesa de servicios <a href="https://universidadean.edu.co/mesa-de-servicios" target="_blank">https://universidadean.edu.co/mesa-de-servicios</a>  seleccionando:<br/>
@@ -55,27 +55,29 @@
               <div *ngIf="msgError">
                 <small class="text-danger">{{messageError}}</small>
               </div>
-              <div class="d-grid gap-2 mt-2">
-                <button *ngIf="!loader" class="btn btn-success text-center" (click)="validarUsuarioVotacion()" type="button"
-                [disabled]="correctaSolicitudHttp">Consultar</button>
-                <button *ngIf="loader" class="btn btn-success text-center" type="button" style="height: 37px;">
-                  <div class="lds-ellipsis">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                  </div>
-                </button>
-                <!-- <div  class="container-fluid">
-                  <div  class="row">
-                    <div  class="col-12 text-center">
-                      <a href="https://cambioclave.universidadean.edu.co/correo.aspx" target="_blank" class="btn btn-link text-center">Soy estudiante activo y olvidé mis credenciales</a>
-                      <a *ngIf="true" class="btn btn-link text-center" (click)="abrirModalrecuperarCredenciales(modalRecuperaCredenciales)">Soy egresado y olvidé mis credenciales</a>
+
+            </form>
+
+            <div class="container-fluid mt-4">
+              <form #formre="ngForm">
+                <div class="row mt-3">
+                  <div class="col-12 mb-3">
+                    <re-captcha id="recaptcha" name="recaptcha" class="recaptcha-cls" #recaptcha="ngModel" [(ngModel)]="tokenRecaptchaV2" required [class.is-invalid]="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)"></re-captcha>
+                    <div *ngIf="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)" class="invalid-feedback">
+                      <div *ngIf="recaptcha.errors?.['required']"  style="color: red;">El campo es requerido.</div>
                     </div>
                   </div>
-                </div> -->
-              </div>
-            </form>
+                </div>
+
+                  <div class="modal-footer justify-content-center">
+                    <button  type="button" class="btn btn-success" (click)="validarUsuarioVotacion(formre)" [disabled]="correctaSolicitudHttp">
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="margin-bottom: 2px; margin-right: 2px;"
+                      *ngIf="this.correctaSolicitudHttp"></span>
+                      Consultar</button>
+                  </div>
+
+              </form>
+            </div>
           </div>
         </div>
 

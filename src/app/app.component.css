@@ -1,0 +1,239 @@
+.imagenFondo {
+  padding-top: 5pc;
+  padding-bottom: 5pc;
+  background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)),
+    url('../assets/leaf-1498985_960_720.jpg');
+}
+
+* {
+  text-align: justify;
+}
+
+.bg-verde {
+  color: White;
+  background-color: #3BAC53;
+}
+
+.btnVerde {
+  color: White;
+  background-color: #3BAC53;
+  border-style: None;
+  font-size: Medium;
+  font-weight: bold;
+}
+
+.colTexto {
+  color: #ffffff;
+  display: block;
+  background: #0c0c0c94;
+}
+
+@media (max-width: 600px) {
+  .logo {
+    width: 100%;
+  }
+
+  .mtd-5 {
+    margin-top: 2rem !important;
+  }
+
+  .mt-3 {
+    margin-top: -3rem !important;
+  }
+}
+
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-top: -28px;
+  margin-left: 9px;
+}
+
+.lds-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+
+/* ESTILOS FOOTER */
+/*oficina graduados*/
+.oficinaGraduados{
+	background-color: black;
+	color: white;
+	text-align:justify;
+}
+.oficinaGraduadosMensaje{
+	margin: 1rem 0rem;
+	padding: 1rem 3.5rem 0rem 3.5rem;
+	font-size: 15px;
+}
+.oficinaGraduadosContacto{
+	margin: 1rem 0rem;
+	padding: 1rem 3.5rem 0rem 3.5rem;
+	font-size: 14px;
+}
+@media (min-width: 768px){ /*si la pantalla es de mas de 650px... */
+    .oficinaGraduadosMensaje{
+		border-right: 2px solid #3BAC53;
+    }
+}
+
+
+/*footer*/
+footer {
+	color: #ADADAD;
+    font-size: 14px;
+    background-color: #2e2e2e;
+	padding: 62px 0px;
+}
+
+footer ul li a, footer span {
+    font-size: 14px;
+    padding: 0px 4.8px 1.6px 0px;
+    color: #ADADAD;
+    text-decoration: none;
+}
+
+.nav-item::after{
+	margin: 0px -8px;
+	margin-top: -23px;
+	content: "|";
+    float: right;
+}
+
+.nav-item{
+	margin: 0px 0.5rem;
+}
+
+footer ul li a:hover{
+	color: #52ac54;
+}
+
+
+
+/*avisos legales*/
+
+.legales {
+	background-color: #000;
+	padding: 30px 0;
+}
+
+@media (min-width:992px) {
+	.legales {
+		padding: 20px 0;
+	}
+}
+
+.legales .region.row {
+	margin: 0;
+}
+
+.legales * {
+	color: #fff;
+	font-weight: 300;
+	font-size: 12px;
+}
+
+.form-contacto {
+	background-color: #ADADAD;
+	padding-bottom: 1px;
+	margin-bottom: 15px;
+}
+
+.legales p strong {
+	font-weight: 700;
+}
+
+@media (min-width:1200px) {
+	.legales a:hover {
+		color: #3BAC53;
+	}
+}
+
+.legales ul {
+	padding: 0;
+}
+
+.legales ul li {
+	margin: 4px 0;
+	list-style: none;
+}
+
+.legales ul li strong {
+	font-weight: 700;
+}
+.svg-inline--fa {
+    display: inline-block;
+    font-size: inherit;
+    height: 1em;
+    overflow: visible;
+    vertical-align: -.125em;
+}
+
+.avisosLegales { /*avisos legales siempre abajo*/
+	position: relative ;
+	bottom: 0;
+	width: 100%;
+	height: 180px;
+
+  }
+
+
+
+/* FIN ESTILOS FOOTER */
+
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(24px, 0);
+  }
+}

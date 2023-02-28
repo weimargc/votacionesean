@@ -1,0 +1,509 @@
+<div>
+
+  <nav class="navbar navbar-dark bg-dark" aria-label="Dark offcanvas navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="https://cambioclave.universidadean.edu.co/Imagenes/logo-horizontal-es.png" class="logo" alt="">
+      </a>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-verde" aria-label="Offcanvas navbar large">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Consulta de Certificados</a>
+    </div>
+  </nav>
+</div>
+<main class="imagenFondo">
+
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-6 col-sm-12 colTexto ">
+        <h1 class="text-jus">¡Bienvenido a la Universidad Ean!</h1>
+        <p class="text-jus">
+
+          Mediante esta plataforma podrás descargar los certificados académicos solicitados.  Si requieres ampliar la información del certificado puedes ingresar a la sala de atención <a href="https://bit.ly/3fw38kb" target="_blank">https://bit.ly/3fw38kb</a> o radicar la solicitud en la mesa de servicios en el link: <a href="https://universidadean.edu.co/mesa-de-servicios" target="_blank">https://universidadean.edu.co/mesa-de-servicios</a> Centro Responsable: Registro Académico / Categoría: Certificados.<br/>
+          Si tienes alguna dificultad con este enlace, por favor ingresa a la sala de atención del TIC <a href="https://hab.me/gzGSTYp" target="_blank">https://hab.me/gzGSTYp</a>  o radica tu caso en la mesa de servicios <a href="https://universidadean.edu.co/mesa-de-servicios" target="_blank">https://universidadean.edu.co/mesa-de-servicios</a>  seleccionando:<br/>
+          -Centro Responsable: TIC<br/>
+          -Tipo de solicitud: Gestión de Usuario y contraseña.<br/>
+          -Categoría: Correo electrónico y/o Office 365 <br/>
+           <br/>
+          ¡Eanista Siempre Eanista!
+        </p>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <div class="card mtd-5">
+          <div class="card-body">
+            <form [formGroup]="form">
+              <h3 class="text-center">Inicia sesión y descarga tu certificado</h3>
+              <div class="mb-3">
+                <label for="exampleInputuser1" class="form-label">Usuario</label>
+                <input type="text" class="form-control" id="exampleInputuser1" formControlName="user"
+                  aria-describedby="userHelp">
+                <div *ngIf="(form.get('user').invalid && form.get('user').touched) || form.get('user').dirty">
+                  <small class="text-danger" *ngIf="form.get('user').errors?.required">Este campo es requerido</small>
+                  <!-- <small class="text-danger" *ngIf="form.get('user').errors?.user">El formato no es correcto</small> -->
+                </div>
+              </div>
+              <div class=" mb-3">
+                <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" formControlName="pass">
+                <div *ngIf="(form.get('pass').invalid && form.get('pass').touched) || form.get('pass').dirty">
+                  <small class="text-danger" *ngIf="form.get('pass').errors?.required">Este campo es requerido</small>
+                </div>
+              </div>
+              <div *ngIf="msgError">
+                <small class="text-danger">{{messageError}}</small>
+              </div>
+              <div class="d-grid gap-2 mt-2">
+                <button *ngIf="!loader" class="btn btn-success text-center" (click)="sendData()" type="button"
+                  [disabled]="!codeEncryp">Descargar</button>
+                <button *ngIf="loader" class="btn btn-success text-center" type="button" style="height: 37px;">
+                  <div class="lds-ellipsis">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                </button>
+                <div  class="container-fluid">
+                  <div  class="row">
+                    <div  class="col-12 text-center">
+                      <a href="https://cambioclave.universidadean.edu.co/correo.aspx" target="_blank" class="btn btn-link text-center">Soy estudiante activo y olvidé mis credenciales</a>
+                      <a *ngIf="true" class="btn btn-link text-center" (click)="abrirModalrecuperarCredenciales(modalRecuperaCredenciales)">Soy egresado y olvidé mis credenciales</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+
+<div class="avisosLegales">
+  <div class="legales">
+      <div class="container">
+          <div class="row">
+              <div class="item col-12 col-sm-6 col-md-3 order-sm-1 order-md-0 pt-3">
+                  <section class="row region region-legales-primero">
+                      <div id="block-logoconacreditacion"
+                          class="block block-block-content block-block-content7fcd85a3-78de-4bd3-abde-abc5b55456a7">
+
+
+                          <div class="content">
+
+                              <div
+                                  class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item">
+                                  <div class="row">
+                                      <div class="col-3 col-md-4"><img alt="EAN" class="img-fluid"
+                                              src="https://www.universidadean.edu.co/sites/default/files/logo-vertical.png">
+                                      </div>
+
+                                      <div class="col-9 col-md-8">
+                                          <div class="cont-acredita">
+                                              <p class="tit">Con acreditación Institucional de Alta Calidad</p>
+                                              <a href="https://www.universidadean.edu.co/sites/default/files/institucion/resoluciones/R_023654RenovacionAcreditacion.pdf"
+                                                  target="_blank">Res. 023654</a> del <a
+                                                  href="https://www.mineducacion.gov.co"
+                                                  target="_blank">Mineducación</a>
+                                              <span>10/12/21, Vigencia 10/12/27</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                          </div>
+                      </div>
+
+                  </section>
+
+              </div>
+              <div class="item col-12 col-sm-12 col-md-6 order-sm-3 order-md-1 pt-3">
+                  <section class="row region region-legales-segundo">
+                      <div id="block-footerdireccioneslegales"
+                          class="block block-block-content block-block-content119d16e2-ac03-4d22-a877-e0ab79353727">
+
+
+                          <div class="content">
+
+                              <p>
+                                  <strong>Sedes: </strong> <a href="https://goo.gl/maps/iS3M2LxxJgVtdjW2A" target="_blank" title="Ean Legacy">Ean Legacy: Carrera 11 No. 78-47</a> - <a href="https://goo.gl/maps/ZVzPGKs2Ah82" target="_blank" title="Fundadores">Fundadores: Calle 79 # 11 - 45</a> - <a href="https://goo.gl/maps/UidG7Q2xE4H2" target="_blank" title="Avenida Chile">Av. Chile: Calle 71 # 9 - 84</a> Bogotá D.C., Cundinamarca, Colombia, Suramérica.<br />
+                                  <br />
+                                  <strong>Línea gratuita nacional:</strong> <a href="tel:018000931000" title="Línea gratuita nacional">+57-01-8000-931000</a> <strong>Centro de contacto en Bogotá:</strong> <a href="tel:6015936161" target="_blank" title="Centro de contacto en Bogotá - Línea 1">+(57-601) 593 6161</a> - <a href="tel:6015936464" target="_blank" title="Centro de contacto en Bogotá - Línea 2">+(57-601) 593 6464</a> <strong>E-mail: </strong><a href="mailto:informacion@universidadean.edu.co" title="Correo electrónico">informacion@universidadean.edu.co</a><br />
+                                  <a href="https://universidadean.edu.co/la-universidad/quienes-somos/orientacion-estrategica/reglamentos-universidad-ean/aviso-de-privacidad" title="Aviso de privacidad">Aviso de privacidad</a> | <a href="https://universidadean.edu.co/sites/default/files/institucion/acuerdos/Acuerdo-No-035-2021-SG.pdf" target="_blank" title="Política de Tratamiento de Datos Personales">Política de Tratamiento de Datos Personales</a> | <a href="https://universidadean.edu.co/la-universidad/quienes-somos/orientacion-estrategica/reglamentos-universidad-ean/manual-de-uso-de-cookies-y-otras-tecnologias-de-la-universidad-ean" title="Manual de Cookies u otras Tecnologías"> Manual de Cookies u otras Tecnologías</a> | <a href="https://universidadean.edu.co/sites/default/files/2022-07/Manual%20de%20Seguridad%20de%20la%20Informaci%C3%B3n%20%28v6%29.pdf" target="_blank" title="Manual de Seguridad de la Información">Manual de Seguridad de la Información</a> | <a href="https://universidadean.edu.co/sites/default/files/2021-11/Acuerdo-No-022-de-2021.pdf" target="_blank" title="Política de Seguridad de la Información">Política de Seguridad de la Información</a> | <a href="https://universidadean.edu.co/sites/default/files/institucion/manuales/ManualInternoProgramaIntegralGestionDatosPersonales.pdf" target="_blank" title="Programa Integral de Gestión de Datos Personales">Programa Integral de Gestión de Datos Personales</a> | <a href="https://universidadean.edu.co/sites/default/files/institucion/acuerdos/Directrices_de_uso_de_las_Plataformas_Digitales.pdf" target="_blank" title="Directrices de uso de las Plataformas Digitales">Directrices de uso de las Plataformas Digitales</a>
+                              </p>
+
+                          </div>
+                      </div>
+
+                  </section>
+
+              </div>
+              <div class="item col-12 col-sm-6 col-md-3 order-sm-2 order-md-2 pt-3">
+                  <section class="row region region-legales-tercero">
+                      <div id="block-contactanos"
+                          class="col-12 text-center block block-block-content block-block-contentd1f35382-f41c-4eec-a570-c600e1753c37">
+
+
+                          <div class="content">
+
+                              <div
+                                  class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item">
+                                  <a href="/contacto"><svg class="svg-inline--fa fa-envelope fa-w-16"
+                                          aria-hidden="true" data-prefix="far" data-icon="envelope" role="img"
+                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                          <path fill="currentColor"
+                                              d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z">
+                                          </path>
+                                      </svg><!-- <i class="fa far fa-envelope"></i> --> Contáctanos</a>
+                              </div>
+
+                          </div>
+                      </div>
+                      <nav role="navigation" aria-labelledby="block-menuredessociales-2-menu"
+                          id="block-menuredessociales-2"
+                          class="mx-auto text-center col-12 block block-menu navigation menu--menu-redes-sociales">
+
+                          <h2 class="sr-only" id="block-menuredessociales-2-menu">Menú Redes Sociales</h2>
+
+
+
+                          <ul block="block-menuredessociales-2" class="clearfix nav">
+                              <li aria-label="Facebook">
+                                  <a href="https://www.facebook.com/UniversidadEANColombia" target="_blank"
+                                      title="Icono facebook"
+                                      class="nav-link nav-link-https--wwwfacebookcom-universidadeancolombia"><svg
+                                          class="svg-inline--fa fa-facebook-square fa-w-14" aria-hidden="true"
+                                          data-prefix="fab" data-icon="facebook-square" role="img"
+                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                                          <path fill="currentColor"
+                                              d="M448 80v352c0 26.5-21.5 48-48 48h-85.3V302.8h60.6l8.7-67.6h-69.3V192c0-19.6 5.4-32.9 33.5-32.9H384V98.7c-6.2-.8-27.4-2.7-52.2-2.7-51.6 0-87 31.5-87 89.4v49.9H184v67.6h60.9V480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48z">
+                                          </path>
+                                      </svg><!-- <i class="fa fab fa-facebook-square" aria-hidden="true"></i> --></a>
+                              </li>
+                              <li aria-label="Twitter">
+                                  <a href="https://twitter.com/UniversidadEAN" target="_blank" title="Icono twitter"
+                                      class="nav-link nav-link-https--twittercom-universidadean"><svg
+                                          class="svg-inline--fa fa-twitter fa-w-16" aria-hidden="true"
+                                          data-prefix="fab" data-icon="twitter" role="img"
+                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                          <path fill="currentColor"
+                                              d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z">
+                                          </path>
+                                      </svg><!-- <i class="fa fab fa-twitter" aria-hidden="true"></i> --></a>
+                              </li>
+                              <li aria-label="Instagram">
+                                  <a href="https://www.instagram.com/universidad_ean/" target="_blank"
+                                      title="Icono Instagram"
+                                      class="nav-link nav-link-https--wwwinstagramcom-universidad-ean-"><svg
+                                          class="svg-inline--fa fa-instagram fa-w-14" aria-hidden="true"
+                                          data-prefix="fab" data-icon="instagram" role="img"
+                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                                          <path fill="currentColor"
+                                              d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z">
+                                          </path>
+                                      </svg><!-- <i class="fa fab fa-instagram" aria-hidden="true"></i> --></a>
+                              </li>
+                              <li aria-label="Linkedin">
+                                  <a href="https://co.linkedin.com/school/ean/" target="_blank" title="Icono linkedin"
+                                      class="nav-link nav-link-https--colinkedincom-school-ean-"><svg
+                                          class="svg-inline--fa fa-linkedin fa-w-14 instagram" aria-hidden="true"
+                                          data-prefix="fab" data-icon="linkedin" role="img"
+                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                                          <path fill="currentColor"
+                                              d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z">
+                                          </path>
+                                      </svg>
+                                      <!-- <i class="fa fab fa-linkedin instagram" aria-hidden="true"></i> --></a>
+                              </li>
+                              <li aria-label="Youtube">
+                                  <a href="https://www.youtube.com/user/PortalUEAN" target="_blank"
+                                      title="Icono youtube"
+                                      class="nav-link nav-link-https--wwwyoutubecom-user-portaluean"><svg
+                                          class="svg-inline--fa fa-youtube fa-w-18 youtube" aria-hidden="true"
+                                          data-prefix="fab" data-icon="youtube" role="img"
+                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg="">
+                                          <path fill="currentColor"
+                                              d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z">
+                                          </path>
+                                      </svg><!-- <i class="fa fab fa-youtube youtube" aria-hidden="true"></i> --></a>
+                              </li>
+                          </ul>
+
+
+
+                      </nav>
+                      <div id="block-iconosapp"
+                          class="mx-auto text-center block block-block-content block-block-content7aebb657-629f-44c7-b843-dcedd95234d9">
+
+
+                          <div class="content">
+
+                              <div
+                                  class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item">
+                                  <span class="resalto text-left text-white"><strong>Descarga nuestra app
+                                          en:</strong></span>
+                                  <div class="row descarga-apps">
+                                      <div class="col"><a
+                                              href="https://play.google.com/store/apps/details?id=co.ean.app.universidadean"
+                                              target="_blank"><img
+                                                  src="https://universidadean.edu.co/sites/default/files/theme/plantilla/universidad-ean-app-android.png"
+                                                  alt="App Google Play" class="img-fluid center-block"></a></div>
+                                      <div class="col"><a
+                                              href="https://itunes.apple.com/co/app/universidad-ean/id1328447773?mt=8"
+                                              target="_blank"><img
+                                                  src="https://www.universidadean.edu.co/sites/default/files/theme/plantilla/universidad-ean-app-itunes.png"
+                                                  alt="App Store" class="img-fluid center-block"></a></div>
+                                  </div>
+                              </div>
+
+                          </div>
+                      </div>
+
+                  </section>
+
+              </div>
+          </div>
+      </div>
+
+  </div>
+</div>
+
+
+<!-- MODAL RECUPERAR CONTRASEÑA -->
+<ng-template #modalRecuperaCredenciales let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Recuperar contraseña</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click');cerrarModal();">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <!-- <div *ngIf="mensajeErrorModalCredenciales" class="alert alert-danger" role="alert">
+      <button type="button" class="close close-alert" aria-label="Close" (click)="cerrarAlert();">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="alert-heading">Algo falló!</h4>
+      <p *ngIf="intentoPreguntasReto<=2" class="">{{mensajeErrorModalCredenciales}}</p>
+      <p *ngIf="intentoPreguntasReto==3" class="">{{mensajeErrorModalCredenciales}} <b><a href="https://universidadean.edu.co/mesa-de-servicios" style="color:#3BAC53" target="_blank">https://universidadean.edu.co/mesa-de-servicios</a></b> y radica tu solicitud de soporte.</p>
+      <hr>
+    </div> -->
+
+    <div *ngIf="mensajeErrorModalCredenciales" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>Algo falló!</strong>
+      <p *ngIf="intentoPreguntasReto<=2" class="">{{mensajeErrorModalCredenciales}}</p>
+      <p *ngIf="intentoPreguntasReto==3" class="">{{mensajeErrorModalCredenciales}} <b><a href="https://universidadean.edu.co/mesa-de-servicios" style="color:#3BAC53" target="_blank">https://universidadean.edu.co/mesa-de-servicios</a></b> y radica tu solicitud de soporte.</p>
+      <hr>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="cerrarAlert();"></button>
+    </div>
+
+    <div *ngIf="esNotificaado" class="alert alert-success" role="alert">
+      <h4 class="alert-heading">Éxito!</h4>
+      <p class="">Hemos enviado un mensaje al correo <b class="" style="word-wrap: break-word;">{{this.formularioCorreoNumero.value.correo}}</b> con la información de acceso.</p>
+      <hr>
+    </div>
+
+   <ng-container *ngIf="!continuarPreguntasReto && !esPreguntaRetoValido">
+    <div class="alert alert-info text-center" role="alert">
+      <b>Indica tu tipo y número de documento</b>
+    </div>
+    <form  autocomplete="off" [formGroup]="formularioRecuperaCredenciales">
+      <div class="form-group mt-4">
+        <label for="tipo_documento">  <b>Tipo de documento <span style="color: red;">*</span> </b></label>
+        <ng-select class="fontsize-combos-select" formControlName="tipo_documento" [clearable]="false" [searchable]="true"
+        notFoundText="No se encontró resultados"  [ngClass]="{ 'form-control-border-invalid':tipo_documentoNoValido}">
+         <ng-option value="" selected disabled> Seleccionar </ng-option>
+         <ng-option value="CC"> CÉDULA DE CIUDADANÍA </ng-option>
+         <ng-option value="TI"> TARJETA DE IDENTIDAD </ng-option>
+         <ng-option value="CE"> CÉDULA DE EXTRANJERÍA </ng-option>
+         <ng-option value="PA"> PASAPORTE </ng-option>
+         <ng-option *ngFor="let tipoDoc of tiposDocumento" [value]="tipoDoc.codigo" class="fontsize-combos-select">{{tipoDoc.descripcion}}</ng-option>
+      </ng-select>
+       <small *ngIf="tipo_documentoNoValido" style="color:red">
+         Debe seleccionar un tipo de documento
+       </small>
+      </div>
+      <div class="form-group mt-4">
+        <label for="documento"><b>Número de documento <span style="color: red;">*</span> </b></label>
+        <input type="text" class="form-control" placeholder="Número documento" id="documento"
+        formControlName="documento" [class.is-invalid]="documentoNoValido" appUppercase>
+      <small *ngIf="documentoNoValido" style="color: red;">
+        Número de documento requerido o inválido
+      </small>
+      </div>
+    </form>
+
+<div class="container-fluid mt-4">
+  <form #form="ngForm">
+    <div class="row mt-3">
+      <div class="col-12 mb-3">
+        <re-captcha id="recaptcha" name="recaptcha" class="recaptcha-cls" #recaptcha="ngModel" [(ngModel)]="tokenRecaptchaV2" required [class.is-invalid]="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)"></re-captcha>
+        <div *ngIf="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)" class="invalid-feedback">
+          <div *ngIf="recaptcha.errors?.['required']"  style="color: red;">El campo es requerido.</div>
+        </div>
+      </div>
+    </div>
+
+      <div class="modal-footer justify-content-center">
+        <button *ngIf="!continuarPreguntasReto && !esPreguntaRetoValido" type="button" class="btn btn-success" (click)="validarEstudianteExiste(form)" [disabled]="correctaSolicitudHttp">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="margin-bottom: 2px; margin-right: 2px;"
+          *ngIf="this.correctaSolicitudHttp"></span>
+          Continuar</button>
+      </div>
+
+  </form>
+</div>
+  </ng-container>
+
+  <ng-container *ngIf="continuarPreguntasReto && !this.esNotificaado">
+    <div class="alert alert-info text-center" role="alert">
+      <b>Por favor responda las siguientes preguntas</b>
+    </div>
+    <form  autocomplete="off" [formGroup]="formularioPreguntasReto">
+      <div class="form-group mt-4">
+        <label for="programa">  <b>¿De cuál programa académico te graduaste? <span style="color: red;">*</span> </b></label>
+        <ng-select class="fontsize-combos-select" formControlName="programa" [clearable]="false" [searchable]="true"
+        notFoundText="No se encontró resultados"  [ngClass]="{ 'form-control-border-invalid':programaoNoValido}">
+         <ng-option value="" selected disabled> Seleccionar </ng-option>
+         <ng-option *ngFor="let programa of listaPosiblesCarreras" [value]="programa.id" class="fontsize-combos-select">{{programa.nombre}}</ng-option>
+      </ng-select>
+       <small *ngIf="programaoNoValido" style="color:red">
+         Debe seleccionar un programa académico
+       </small>
+      </div>
+      <div class="form-group mt-4">
+        <label for="anio"><b>¿En qué año te graduaste? <span style="color: red;">*</span> </b></label>
+        <ng-select class="fontsize-combos-select" formControlName="anio" [clearable]="false" [searchable]="true"
+        notFoundText="No se encontró resultados"  [ngClass]="{ 'form-control-border-invalid':anioNoValido}">
+         <ng-option value="" selected disabled> Seleccionar </ng-option>
+         <ng-option *ngFor="let anyo of listaPosiblesAnios" [value]="anyo" class="fontsize-combos-select">{{anyo}}</ng-option>
+      </ng-select>
+       <small *ngIf="anioNoValido" style="color:red">
+         Debe seleccionar un año
+       </small>
+      </div>
+      <div class="modal-footer justify-content-center">
+         <button *ngIf="continuarPreguntasReto &&  !this.esNotificaado" type="button" class="btn btn-success" (click)="validaPreguntasReto()" [disabled]="correctaSolicitudHttp">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="margin-bottom: 2px; margin-right: 2px;"
+          *ngIf="this.correctaSolicitudHttp"></span>
+          Continuar</button>
+      </div>
+    </form>
+  </ng-container>
+
+  <ng-container *ngIf="esPreguntaRetoValido">
+    <div class="alert alert-info text-center" role="alert">
+      <b>Datos de contacto y clave</b>
+    </div>
+    <form autocomplete="off" [formGroup]="formularioCorreoNumero">
+      <div class="form-group mt-4">
+        <label for="correo">  <b>Correo electrónico personal <span style="color: red;">*</span> </b></label>
+        <input type="text" class="form-control" placeholder="Correo electrónico personal" id="correo"
+        formControlName="correo" [class.is-invalid]="correoNoValido">
+      <small *ngIf="correoNoValido" style="color: red;">
+        Correo electrónico no válido.
+      </small>
+      </div>
+      <div class="form-group mt-4">
+        <label for="telefono"><b>Número telefónico <span style="color: red;">*</span> </b></label>
+        <input type="text" class="form-control" placeholder="Teléfono" id="telefono" formControlName="telefono"
+        [class.is-invalid]="telefonoNoValido">
+      <small *ngIf="telefonoNoValido" style="color: red;">
+        Teléfono inválido, mínimo 6 y máximo 10 dígitos.
+      </small>
+      </div>
+      <div class="form-group mt-4">
+        <label for="clave"><b>Clave correo institucional <span style="color: red;">*</span> </b></label>
+        <input type="password" class="form-control" placeholder="Clave" id="clave" formControlName="clave" minlength="12" maxlength="32"
+        [class.is-invalid]="claveNoValido" >
+      <small *ngIf="claveNoValido" style="color: red;">
+        La clave debe tener mínimo 12 caracteres, al menos una letra mayúscula, una minúscula, un número y un caracter especial [$@$!¡%#*?&"/\()=+-]
+      </small>
+      </div>
+      <div class="form-group mt-4">
+        <label for="claveConfirm"><b>Confirmar clave correo institucional <span style="color: red;">*</span> </b></label>
+        <input type="password" class="form-control" placeholder="Confirmar clave" id="claveConfirm" formControlName="claveConfirm" minlength="12" maxlength="32"
+        [class.is-invalid]="formularioCorreoNumero.get('claveConfirm').errors && claveConfirmNoValido">
+
+        <small *ngIf="formularioCorreoNumero.get('claveConfirm').errors && claveConfirmNoValido" style="color: red;">
+          <div *ngIf="formularioCorreoNumero.get('claveConfirm').errors.required">La confirmación de clave es requerida</div>
+          <div *ngIf="formularioCorreoNumero.get('claveConfirm').errors.pattern">La clave debe tener mínimo 12 caracteres, al menos una letra mayúscula, una minúscula, un número y un caracter especial [$@$!¡%#*?&"/\()=+-]</div>
+          <div *ngIf="formularioCorreoNumero.get('claveConfirm').errors.confirmPasswordValidator">Clave y Confimar clave no coinciden </div>
+        </small>
+      <!-- <small *ngIf="claveConfirmNoValido" style="color: red;">
+        La clave debe tener mínimo 12 caracteres, al menos una letra mayúscula, una minúscula, un número y un caracter especial $@$!¡%#*?&"/\()=+-].
+      </small>
+      <small *ngIf="clavesNoCoinciden" style="color: red;">
+        Clave y Confimar clave no coinciden.
+      </small> -->
+      </div>
+
+      <div class="form-group col-12 col-sm-12">
+        <div class="container-fluid">
+          <div class="form-group row">
+
+            <div class="input-group-sm col-12 text-center custom-control custom-radio mt-3">
+              <input type="radio" id="autorizaDatos1"  formControlName="autorizaDatos" [value]="true" class="custom-control-input">
+              <label  class="custom-control-label" for="autorizaDatos1"></label>
+              <span (click)="openModalAutorizaDatos(modalTratamientoDatos);" style="color:#3BAC53;cursor: pointer;"><b>Autorizo a la Universidad Ean para tratar mis datos personales</b></span>
+              <small *ngIf="autorizaDatosNoValido" style="color:red;display: block;font-size: 13px;text-align: center;">
+                Debe autorizar tratamiento de datos personales
+              </small>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer justify-content-center">
+        <button *ngIf="esPreguntaRetoValido" type="button" class="btn btn-success" (click)="registrarNotificarRecuperacion()" [disabled]="correctaSolicitudHttp">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="margin-bottom: 2px; margin-right: 2px;"
+          *ngIf="this.correctaSolicitudHttp"></span>
+          Continuar</button>
+      </div>
+    </form>
+  </ng-container>
+  </div>
+
+</ng-template>
+
+<ng-template #modalTratamientoDatos let-c="close" let-d="dismiss">
+
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" style="font-size: 1.3rem;">Manejo de tus datos personales</h4>
+    <!-- <a class="close click" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </a> -->
+  </div>
+  <div class="modal-body">
+    <p class="txt-tratamiento-datos">De manera voluntaria, explícita, informada e inequívoca, <a href="https://universidadean.edu.co/la-universidad/aviso-datos-personales" target="_blank" title="Autoriza uso de datos personales">autorizo a la Universidad Ean para tratar mis datos personales</a>, de acuerdo con lo dispuesto en los artículos 5, 7 y concordantes del Decreto 1377 de 2013 y las demás disposiciones legales referentes al tema.<br>Para mayor información acerca del manejo de tus datos personales, puedes revisar nuestro
+      <a href="https://universidadean.edu.co/la-universidad/aviso-de-privacidad" target="_blank" title="Aviso de privacidad">Aviso de privacidad</a> y nuestra
+      <a href="https://universidadean.edu.co/sites/default/files/institucion/acuerdos/politica-tratamiento-de-datos-personales.pdf" target="_blank" title="Política de tratamiento de datos personales">Política de tratamiento de datos personales.</a></p>
+  </div>
+  <div class="modal-footer"> <button type="button" class="btn" (click)="d('Cross click')">Cerrar</button></div>
+
+
+</ng-template>
+
+<ng-template #contentModalInfodescargaExito let-modal let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" style="font-size: 1.3rem;">Descarga exitosa</h4>
+    <!-- <a class="close click" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </a> -->
+  </div>
+  <div class="modal-body">
+    <h5 class="text-center">Tu certificado se ha generado con éxito.</h5>
+  </div>
+  <div class="modal-footer"> <button type="button" class="btn" (click)="d('Cross click')">Cerrar</button></div>
+
+
+
+</ng-template>

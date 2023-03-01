@@ -79,6 +79,44 @@ export class AppComponent {
   validarUsuarioVotacion(formRecaptcha:NgForm){
     this.mensajeErrorModalCredenciales=null;
     this.recaptchaTemp = formRecaptcha;
+    if (this.form.invalid) {
+      return Object.values(this.form.controls).forEach((control:any) => {
+        if (control instanceof FormGroup) {
+          Object.values(control.controls).forEach(c => c.markAsTouched());
+        }
+        else {
+          control.markAsTouched();
+        }
+      });
+    }
+
+    if (this.form.invalid) {
+      this.submitted = true
+      return;
+    }
+
+    // 1. Obtener token para consumir API
+       this.serviceDescarga.consultarTokenApiVotantes().subscribe(respToken=>{
+        //console.log('respToken',respToken);
+        sessionStorage.setItem('tokenv',respToken.token)
+        let nombreUsuario:string = this.form.value.user.split('@')[0]
+        const datosValidaEstudiante = {
+          user: nombreUsuario.trim().toLowerCase(),
+          pass: this.form.value.pass
+         };
+         this.consutarApiHabilitados(datosValidaEstudiante);
+
+      },error=>{
+        this.toastrService.error('No se pudo obtener el token.', 'No autorizado!');
+        sessionStorage.removeItem('tokenv');
+        return;
+      });
+
+  }
+
+  validarUsuarioVotacionConCaptcha(formRecaptcha:NgForm){
+    this.mensajeErrorModalCredenciales=null;
+    this.recaptchaTemp = formRecaptcha;
     if (formRecaptcha.invalid) {
       for (const control of Object.keys(formRecaptcha.controls)) {
         formRecaptcha.controls[control].markAsTouched();
@@ -93,21 +131,20 @@ export class AppComponent {
       });
     }
 
-    let data = {
-      usuario: this.form.controls['user'].value,
-      contrasena: this.form.controls['pass'].value
-    };
-
     if (this.form.invalid) {
       this.submitted = true
       return;
     }
     const datosValidaEstudiante = {
-      num_iden: this.form.value.user,
-      tipo_iden: this.form.value.pass
+      user: this.form.value.user,
+      pass: this.form.value.pass
      };
      //console.log('datos usuario : >>', datosAutenticacion);
      this.serviceDescarga.validarEstudianteExiste(datosValidaEstudiante).subscribe(respValida=>{
+
+      // 1. Obtener token para consumir API
+      this.serviceDescarga.validarEstudianteExiste
+
       if(respValida.respuesta==='true'){
         //Lanzar modal
         this.abrirModalConsultaExitosa();
@@ -126,22 +163,39 @@ export class AppComponent {
      });
   }
 
-  consutarApiHabilitados(correo:string) {
+  consutarApiHabilitados(datosValidaEstudiante) {
     this.listaEstamentos=[];
-    this.serviceDescarga.consultarVotanteHabilitado(correo).pipe().subscribe({
+    this.serviceDescarga.consultarVotanteHabilitado(datosValidaEstudiante).pipe().subscribe({
       next: (res: any) => {
         console.log('resp: ',res);
 
         if (res.length>0) {
-          this.listaEstamentos=res;
-          this.abrirModalConsultaExitosa();
+          res.forEach(element => {
+            if(element.codigo_estamento && element.codigo_estamento !==''){
+              this.listaEstamentos.push(element);
+            }
+          });
+          //Validando que la lista por lo menos teng un elemento para mostrar
+          if(this.listaEstamentos.length>0){
+            this.abrirModalConsultaExitosa();
+          }else{
+            this.toastrService.warning('Usuario no habilitado para votar', 'No habiltado!');
+          }
+          sessionStorage.removeItem('tokenv');
         }else{
           this.toastrService.warning('Usuario no habilitado para votar', 'No habiltado!');
+          sessionStorage.removeItem('tokenv');
         }
       },
-      error: () => {
-        this.listaEstamentos=[];
-        this.toastrService.error(Constants.MENSAJES_ALERTS.ERROR_API, 'Error!');
+      error: (error) => {
+        if(error.status === 403){
+          this.toastrService.warning('Usuario o contraseña incorrectos', 'No autorizado!');
+        }else{
+          //console.log(error);
+          this.listaEstamentos=[];
+          this.toastrService.error(Constants.MENSAJES_ALERTS.ERROR_API, 'Error!');
+        }
+        sessionStorage.removeItem('tokenv');
       }
     })
   }

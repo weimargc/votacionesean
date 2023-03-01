@@ -56,9 +56,16 @@
                 <small class="text-danger">{{messageError}}</small>
               </div>
 
+              <div class="modal-footer justify-content-center">
+                <button  type="button" class="btn btn-success" (click)="validarUsuarioVotacion(null)" [disabled]="correctaSolicitudHttp">
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="margin-bottom: 2px; margin-right: 2px;"
+                  *ngIf="this.correctaSolicitudHttp"></span>
+                  Consultar</button>
+              </div>
+
             </form>
 
-            <div class="container-fluid">
+            <div class="container-fluid" *ngIf="false">
               <form #formre="ngForm">
                 <div class="row mt-4">
                   <div class="col-12 mb-3">
@@ -78,6 +85,8 @@
 
               </form>
             </div>
+
+
           </div>
         </div>
 
@@ -550,10 +559,15 @@
           <td>{{i+1}}</td>
           <td>
             <b>Estamento:</b> {{item.nombre_estamento}}.
-            <br>
-            <b>Elector:</b> {{item.tipo_usuario === 'ES' ? 'Estudiante': 'Docente'}}.
-            <br>
-            <b>Facultad:</b> {{item.nombre_facultad ? (item.nombre_facultad | titlecase) : ''}}.
+            <!-- <ng-container *ngIf="item.codigo_estamento.includes('CCF')">
+              <br>
+              <b>Elector:</b> {{item.tipo_usuario === 'ES' ? 'Estudiante': 'Docente'}}.
+            </ng-container> -->
+            <ng-container *ngIf="item.codigo_estamento.includes('COAC')">
+              <br>
+              <b>Facultad:</b> {{item.nombre_facultad ? (item.nombre_facultad | titlecase) : ''}}.
+            </ng-container>
+
           </td>
         </tr>
       </tbody>

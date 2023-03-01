@@ -27,8 +27,21 @@ export class DescargasService {
       }));
   }
 
-  consultarVotanteHabilitado(correo: string){
-    return this.http.get<any>(`${environment.votantesHabilitadosApi}${correo}`)
+  consultarVotanteHabilitado(request){
+    return this.http.post<any>(`${environment.apiBaseVotaciones}${environment.votantesHabilitadosApi}`,request)
+    .pipe(
+      map(respuesta => {
+        //this.respuestaLogin = respuesta;
+        //console.log("respuesta autenticacion", this.respuestaLogin);
+        return respuesta;
+      }));
+  }
+
+  consultarTokenApiVotantes(){
+    let formData: any = new FormData();
+    formData.append('username', environment.userTokenVotaciones);
+    formData.append('password', environment.passTokenVotaciones);
+    return this.http.post<any>(`${environment.apiBaseVotaciones}${environment.getTokenVotacionesApi}`,formData)
     .pipe(
       map(respuesta => {
         //this.respuestaLogin = respuesta;

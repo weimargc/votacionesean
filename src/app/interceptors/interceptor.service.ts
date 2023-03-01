@@ -2,6 +2,22 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 
+
+// @Injectable()
+// export class AuthInterceptor implements HttpInterceptor {
+//   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+//     const user = JSON.parse(localStorage.getItem('user'));
+//     if (user && user.token) {
+//       request = request.clone({
+//         setHeaders: {
+//           Authorization: `Token ${user.accessToken}`
+//         }
+//       });
+//     }
+//     return next.handle(request);
+//   }
+// }
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +29,17 @@ export class InterceptorService implements HttpInterceptor {
     //console.log('pasando por interceptor');
 
     this.spinerService.requestStarted();
-    return this.handler(next, request);
+    const token = sessionStorage.getItem('tokenv');
+    if (token) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Token ${token}`
+        }
+      });
+      return this.handler(next, request);
+    }else{
+      return this.handler(next, request);
+    }
   }
 
   handler(next, request) {

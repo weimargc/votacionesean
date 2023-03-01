@@ -46,6 +46,7 @@ export class AppComponent {
   recaptchaTemp: NgForm;
   correctaSolicitudHttp = false;
   date: Date = new Date();
+  listaEstamentos: any[];
   initSpinner() {
     this._spinnerService.getSpinnerObserver().subscribe((status) => {
       this.correctaSolicitudHttp = (status === 'start');
@@ -114,12 +115,37 @@ export class AppComponent {
       }else{
         this.mensajeErrorModalCredenciales = 'No se encontró el usuario en la base de datos. Intenta nuevamente.';
         this.toastrService.warning(this.mensajeErrorModalCredenciales, 'Ningún registro!');
+
+        //Consultar Api habilitados
+        this.consutarApiHabilitados(this.form.controls['user'].value);
+
       }
      },(error:any)=>{
       this.mensajeErrorModalCredenciales = Constants.MENSAJES_ALERTS.ERROR_API;
       this.toastrService.error(this.mensajeErrorModalCredenciales, 'Error!');
      });
   }
+
+  consutarApiHabilitados(correo:string) {
+    this.listaEstamentos=[];
+    this.serviceDescarga.consultarVotanteHabilitado(correo).pipe().subscribe({
+      next: (res: any) => {
+        console.log('resp: ',res);
+
+        if (res.length>0) {
+          this.listaEstamentos=res;
+          this.abrirModalConsultaExitosa();
+        }else{
+          this.toastrService.warning('Usuario no habilitado para votar', 'No habiltado!');
+        }
+      },
+      error: () => {
+        this.listaEstamentos=[];
+        this.toastrService.error(Constants.MENSAJES_ALERTS.ERROR_API, 'Error!');
+      }
+    })
+  }
+
   abrirModalConsultaExitosa() {
     this.modalService.open(this.childModalConsultaExitosa, {backdrop:'static'});
   }

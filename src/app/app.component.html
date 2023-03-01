@@ -10,7 +10,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-verde" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Consulta del censo electoral votaciones {{date.getFullYear()}}</a>
+      <a class="navbar-brand" href="#">Consulta censo electoral votaciones {{date.getFullYear()}}</a>
     </div>
   </nav>
 </div>
@@ -58,9 +58,9 @@
 
             </form>
 
-            <div class="container-fluid mt-4">
+            <div class="container-fluid">
               <form #formre="ngForm">
-                <div class="row mt-3">
+                <div class="row mt-4">
                   <div class="col-12 mb-3">
                     <re-captcha id="recaptcha" name="recaptcha" class="recaptcha-cls" #recaptcha="ngModel" [(ngModel)]="tokenRecaptchaV2" required [class.is-invalid]="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)"></re-captcha>
                     <div *ngIf="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)" class="invalid-feedback">
@@ -512,13 +512,52 @@
 
 <ng-template #contentModalConsultaExitosa let-modal let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title" style="font-size: 1.3rem;">Consulta exitosa</h4>
+    <h4 class="modal-title" id="modal-basic-title" style="font-size: 1.3rem;">Detalle votación</h4>
     <!-- <a class="close click" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </a> -->
   </div>
+  <!-- <div class="modal-body">
+    <h6 class="text-center"><b>{{listaEstamentos[0].nombres}} {{listaEstamentos[0].apellidos}}</b> habilitado(a) para votar en los siguientes estamentos</h6>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Estamento</th>
+          <th scope="col">Elector</th>
+          <th scope="col">Facultad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of listaEstamentos;let i=index">
+          <td>{{item.nombre_estamento}}</td>
+          <td>{{item.tipo_usuario === 'ES' ? 'Estudiante': 'Docente'}}</td>
+          <td>{{item.nombre_facultad}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div> -->
   <div class="modal-body">
-    <h5 class="text-center">Usuario habilitado para votar.</h5>
+    <h6 class="text-center"><b>{{listaEstamentos[0].nombres}} {{listaEstamentos[0].apellidos}}</b> habilitado(a) para votar en {{date.getFullYear()}}</h6>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Información</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of listaEstamentos;let i=index">
+          <td>{{i+1}}</td>
+          <td>
+            <b>Estamento:</b> {{item.nombre_estamento}}.
+            <br>
+            <b>Elector:</b> {{item.tipo_usuario === 'ES' ? 'Estudiante': 'Docente'}}.
+            <br>
+            <b>Facultad:</b> {{item.nombre_facultad ? (item.nombre_facultad | titlecase) : ''}}.
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <div class="modal-footer"> <button type="button" class="btn" (click)="d('Cross click')">Cerrar</button></div>
 

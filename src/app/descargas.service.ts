@@ -8,6 +8,7 @@ import { environment } from './../environments/environment';
   providedIn: 'root'
 })
 export class DescargasService {
+
   constructor(private http: HttpClient) { }
 
   downloadPDF(data: any) {
@@ -18,6 +19,16 @@ export class DescargasService {
 
   validarEstudianteExiste(request){
     return this.http.post<any>(`${environment.ApiBaseGraduados}${environment.validaEstudiante}`,request)
+    .pipe(
+      map(respuesta => {
+        //this.respuestaLogin = respuesta;
+        //console.log("respuesta autenticacion", this.respuestaLogin);
+        return respuesta;
+      }));
+  }
+
+  consultarVotanteHabilitado(correo: string){
+    return this.http.get<any>(`${environment.votantesHabilitadosApi}${correo}`)
     .pipe(
       map(respuesta => {
         //this.respuestaLogin = respuesta;

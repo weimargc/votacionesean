@@ -7,6 +7,7 @@ export const environment = {
   validaRespuestasRecuperaClave:'/validacion/valida-respuestas/',
   registraNotificaRecuperaClave:'/validacion/actualiza-datos-contacto/',
   url: "https://consultacertificados-dev.universidadean.edu.co/api/Consulta/",
+  votantesHabilitadosApi:'http://127.0.0.1:8000/votaciones/api?correo=',
   recaptcha: {
     siteKey: '6LcQjAEiAAAAAL9yBVeqzeLPOvuS_hKIz_WXeg0o',
   }

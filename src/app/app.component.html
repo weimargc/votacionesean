@@ -35,7 +35,8 @@
         <div class="card mtd-5">
           <div class="card-body">
             <form [formGroup]="form">
-              <h3 class="text-center">Credenciales</h3>
+              <h3 class="text-center">Inicia sesión</h3>
+              <div _ngcontent-aql-c122="" class="leyenda2"> Ingresa usuario y contraseña para verificar el estamento en que está habilitado para votar. </div>
               <div class="mb-3">
                 <label for="exampleInputuser1" class="form-label">Usuario</label>
                 <input type="text" class="form-control" id="exampleInputuser1" formControlName="user"
@@ -300,8 +301,8 @@
     <table class="table table-striped table-hover">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">Información</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -323,7 +324,7 @@
       </tbody>
     </table>
   </div>
-  <div class="modal-footer"> <button type="button" class="btn" (click)="d('Cross click')">Cerrar</button></div>
+  <div class="modal-footer"> <button type="button" class="btn" (click)="d('Cross click');crearrForm()">Cerrar</button></div>
 
 
 

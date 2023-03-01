@@ -286,6 +286,49 @@
   </div>
 </div>
 
+<!-- MODAL RESULTADOS DE HABILTADO PARA VOTAR -->
+<ng-template #contentModalConsultaExitosa let-modal let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" style="font-size: 1.3rem;">Resultado</h4>
+    <!-- <a class="close click" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </a> -->
+  </div>
+
+  <div class="modal-body">
+    <h6 class="text-center"><b>{{listaEstamentos[0].nombres}} {{listaEstamentos[0].apellidos}}</b> habilitado(a) para votar en {{date.getFullYear()}}</h6>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Información</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of listaEstamentos;let i=index">
+          <td>{{i+1}}</td>
+          <td>
+            <b>Estamento:</b> {{item.nombre_estamento}}.
+            <!-- <ng-container *ngIf="item.codigo_estamento.includes('CCF')">
+              <br>
+              <b>Elector:</b> {{item.tipo_usuario === 'ES' ? 'Estudiante': 'Docente'}}.
+            </ng-container> -->
+            <ng-container *ngIf="item.codigo_estamento.includes('COAC')">
+              <br>
+              <b>Facultad:</b> {{item.nombre_facultad ? (item.nombre_facultad | titlecase) : ''}}.
+            </ng-container>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer"> <button type="button" class="btn" (click)="d('Cross click')">Cerrar</button></div>
+
+
+
+</ng-template>
+
 
 <!-- MODAL RECUPERAR CONTRASEÑA -->
 <ng-template #modalRecuperaCredenciales let-modal>
@@ -519,63 +562,5 @@
 
 </ng-template>
 
-<ng-template #contentModalConsultaExitosa let-modal let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title" style="font-size: 1.3rem;">Detalle votación</h4>
-    <!-- <a class="close click" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </a> -->
-  </div>
-  <!-- <div class="modal-body">
-    <h6 class="text-center"><b>{{listaEstamentos[0].nombres}} {{listaEstamentos[0].apellidos}}</b> habilitado(a) para votar en los siguientes estamentos</h6>
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Estamento</th>
-          <th scope="col">Elector</th>
-          <th scope="col">Facultad</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of listaEstamentos;let i=index">
-          <td>{{item.nombre_estamento}}</td>
-          <td>{{item.tipo_usuario === 'ES' ? 'Estudiante': 'Docente'}}</td>
-          <td>{{item.nombre_facultad}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div> -->
-  <div class="modal-body">
-    <h6 class="text-center"><b>{{listaEstamentos[0].nombres}} {{listaEstamentos[0].apellidos}}</b> habilitado(a) para votar en {{date.getFullYear()}}</h6>
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Información</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of listaEstamentos;let i=index">
-          <td>{{i+1}}</td>
-          <td>
-            <b>Estamento:</b> {{item.nombre_estamento}}.
-            <!-- <ng-container *ngIf="item.codigo_estamento.includes('CCF')">
-              <br>
-              <b>Elector:</b> {{item.tipo_usuario === 'ES' ? 'Estudiante': 'Docente'}}.
-            </ng-container> -->
-            <ng-container *ngIf="item.codigo_estamento.includes('COAC')">
-              <br>
-              <b>Facultad:</b> {{item.nombre_facultad ? (item.nombre_facultad | titlecase) : ''}}.
-            </ng-container>
 
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="modal-footer"> <button type="button" class="btn" (click)="d('Cross click')">Cerrar</button></div>
-
-
-
-</ng-template>
 

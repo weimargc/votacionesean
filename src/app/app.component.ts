@@ -167,7 +167,7 @@ export class AppComponent {
     this.listaEstamentos=[];
     this.serviceDescarga.consultarVotanteHabilitado(datosValidaEstudiante).pipe().subscribe({
       next: (res: any) => {
-        console.log('resp: ',res);
+        //console.log('resp: ',res);
 
         if (res.length>0) {
           res.forEach(element => {
@@ -189,7 +189,7 @@ export class AppComponent {
       },
       error: (error) => {
         if(error.status === 403){
-          this.toastrService.warning('Usuario o contraseña incorrectos', 'No autorizado!');
+          this.toastrService.warning('Usuario o contraseña incorrectos. Intenta nuevamente.', 'No autorizado!');
         }else{
           //console.log(error);
           this.listaEstamentos=[];
